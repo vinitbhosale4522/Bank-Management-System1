@@ -1,20 +1,3 @@
-"""
-transaction_operations.py - TransactionOperations class
-=========================================================
-Responsibility:
-  - Menu Option 3: Deposit Amount
-  - Menu Option 4: Withdraw Amount
-  - Menu Option 5: Check Balance
-  - Menu Option 6: View Transaction History (with filtering)
-
-Key Requirements:
-  - Atomic transactions: balance update & transaction log succeed or fail together.
-  - Python Decimal for monetary precision, matching MySQL DECIMAL(12,2).
-  - Parameterized queries to prevent SQL injection.
-  - Disallow deposits/withdrawals on inactive accounts.
-  - Reject zero, negative, or invalid amounts.
-  - Prevent withdrawals exceeding current balance.
-"""
 
 from __future__ import annotations
 
@@ -36,9 +19,7 @@ class TransactionOperations:
         self.db = db
         self.account_ops = account_ops
 
-    # ==========================================================================
     # MENU OPTION 3 - Deposit Amount
-    # ==========================================================================
 
     def deposit(self) -> None:
         """
@@ -112,10 +93,8 @@ class TransactionOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # MENU OPTION 4 - Withdraw Amount
-    # ==========================================================================
-
+.
     def withdraw(self) -> None:
         """
         Withdraw funds from an existing, active account.
@@ -196,9 +175,8 @@ class TransactionOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # MENU OPTION 5 - Check Balance
-    # ==========================================================================
+    
 
     def check_balance(self) -> None:
         """
@@ -247,9 +225,7 @@ class TransactionOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # MENU OPTION 6 - View Transactions (History & Filtering)
-    # ==========================================================================
 
     def view_transactions(self) -> None:
         """
@@ -332,9 +308,7 @@ class TransactionOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # Private input-validation helpers
-    # ==========================================================================
 
     def _get_valid_amount(self, prompt: str) -> Decimal:
         """
