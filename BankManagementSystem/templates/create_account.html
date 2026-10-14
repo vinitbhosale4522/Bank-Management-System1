@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Create Bank Account - Bank Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Create Bank Account</h1>
+  <p>Register a new customer and generate a unique account number</p>
+</div>
+
+<div class="card form-card">
+  <form method="POST" action="{{ url_for('create_account') }}">
+
+    <div class="form-group">
+      <label for="customer_name">Customer Full Name *</label>
+      <input type="text" id="customer_name" name="customer_name" class="form-control" required placeholder="e.g. John Doe">
+      <div class="form-text">Letters and spaces only (2-100 characters).</div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" class="form-control" required placeholder="e.g. 9876543210" maxlength="10">
+      <div class="form-text">Exactly 10 numeric digits.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Residential Address *</label>
+      <textarea id="address" name="address" class="form-control" rows="3" required placeholder="e.g. Flat 101, Green Heights, Pune"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="opening_balance">Opening Balance (Rs.) *</label>
+      <input type="number" id="opening_balance" name="opening_balance" class="form-control" step="0.01" min="0" value="0.00" required>
+      <div class="form-text">Can be 0 or greater.</div>
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Cancel</a>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

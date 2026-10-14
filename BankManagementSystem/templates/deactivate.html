@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Deactivate Account - Bank Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 style="color: #991b1b;">Deactivate Account</h1>
+  <p>Freeze account operations while safeguarding complete historical records</p>
+</div>
+
+<div class="card form-card" style="border-top: 4px solid #b91c1c;">
+
+  <div style="background-color: #fef2f2; border: 1px solid #fecaca; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; color: #991b1b; font-size: 0.9rem;">
+    <strong>Warning:</strong> Deactivating an account permanently freezes it from further deposits and withdrawals. All account and transaction records are preserved in accordance with banking audit compliance.
+  </div>
+
+  <form method="POST" action="{{ url_for('deactivate') }}">
+
+    <div class="form-group">
+      <label for="account_number">Account Number *</label>
+      <input type="text" id="account_number" name="account_number" class="form-control" required placeholder="e.g. ACC000000001" value="{{ account_number or '' }}">
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="confirm_checkbox" value="yes" required style="margin-right: 0.5rem;">
+        I confirm that I want to freeze and deactivate this account.
+      </label>
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-danger btn-block">Confirm Deactivation</button>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Cancel</a>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

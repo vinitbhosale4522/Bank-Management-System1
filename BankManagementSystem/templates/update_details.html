@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Update Customer Details - Bank Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Update Customer Details</h1>
+  <p>Modify contact info or address without altering account balance or history</p>
+</div>
+
+<div class="card form-card">
+  <form method="POST" action="{{ url_for('update_details') }}">
+
+    <div class="form-group">
+      <label for="account_number">Account Number *</label>
+      <input type="text" id="account_number" name="account_number" class="form-control" required placeholder="e.g. ACC000000001" value="{{ account_number or '' }}">
+    </div>
+
+    <div class="form-group">
+      <label for="field_name">Select Field to Update *</label>
+      <select id="field_name" name="field_name" class="form-control" required>
+        <option value="customer_name">Customer Full Name</option>
+        <option value="phone">Phone Number (10 digits)</option>
+        <option value="address">Residential Address</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="new_value">New Value *</label>
+      <input type="text" id="new_value" name="new_value" class="form-control" required placeholder="Enter updated information">
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary btn-block">Update Details</button>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Cancel</a>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

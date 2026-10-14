@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Bank Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Banking Dashboard</h1>
+  <p>Select an operation from the options below</p>
+</div>
+
+<div class="features-grid">
+
+  <!-- Card 1: Create Account -->
+  <div class="feature-card">
+    <h3>1. Create Account</h3>
+    <p>Register a new customer with opening deposit and generate account number.</p>
+    <a href="{{ url_for('create_account') }}" class="btn btn-primary">Open Account</a>
+  </div>
+
+  <!-- Card 2: View Account Details -->
+  <div class="feature-card">
+    <h3>2. View Account Details</h3>
+    <p>Search account info, contact details, balance, and activation status.</p>
+    <a href="{{ url_for('view_account') }}" class="btn btn-primary">View Details</a>
+  </div>
+
+  <!-- Card 3: Deposit Amount -->
+  <div class="feature-card">
+    <h3>3. Deposit Amount</h3>
+    <p>Credit funds to an active account and record transaction ledger.</p>
+    <a href="{{ url_for('deposit') }}" class="btn btn-primary">Deposit Funds</a>
+  </div>
+
+  <!-- Card 4: Withdraw Amount -->
+  <div class="feature-card">
+    <h3>4. Withdraw Amount</h3>
+    <p>Debit funds safely with overdraft validation and atomic ledger logging.</p>
+    <a href="{{ url_for('withdraw') }}" class="btn btn-primary">Withdraw Funds</a>
+  </div>
+
+  <!-- Card 5: Check Balance -->
+  <div class="feature-card">
+    <h3>5. Check Balance</h3>
+    <p>Quick live balance inquiry queried directly from MySQL database.</p>
+    <a href="{{ url_for('check_balance') }}" class="btn btn-primary">Check Balance</a>
+  </div>
+
+  <!-- Card 6: View Transactions -->
+  <div class="feature-card">
+    <h3>6. Transaction History</h3>
+    <p>Inspect ledger statements filtered by account ID and transaction type.</p>
+    <a href="{{ url_for('transactions') }}" class="btn btn-primary">View History</a>
+  </div>
+
+  <!-- Card 7: Update Customer Details -->
+  <div class="feature-card">
+    <h3>7. Update Details</h3>
+    <p>Modify customer name, telephone number, or residential address.</p>
+    <a href="{{ url_for('update_details') }}" class="btn btn-primary">Update Profile</a>
+  </div>
+
+  <!-- Card 8: Deactivate Account -->
+  <div class="feature-card">
+    <h3>8. Deactivate Account</h3>
+    <p>Soft-delete an account to freeze transactions while preserving history.</p>
+    <a href="{{ url_for('deactivate') }}" class="btn btn-danger">Deactivate</a>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Bank Management System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="{{ url_for('dashboard') }}" class="brand">
+        🏦 Bank Management System
+      </a>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('create_account') }}">New Account</a></li>
+        <li><a href="{{ url_for('deposit') }}">Deposit</a></li>
+        <li><a href="{{ url_for('withdraw') }}">Withdraw</a></li>
+        <li><a href="{{ url_for('check_balance') }}">Check Balance</a></li>
+        <li><a href="{{ url_for('transactions') }}">Transactions</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <!-- Flash message alerts (Success/Errors) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+  </main>
+
+  <!-- Simple Footer -->
+  <footer class="footer">
+    <p>Educational Banking Simulation &bull; Powered by Python, Flask, and MySQL</p>
+  </footer>
+
+</body>
+</html>

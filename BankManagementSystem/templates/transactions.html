@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction History - Bank Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Transaction History</h1>
+  <p>Audit ledger and filter transactions by account and type</p>
+</div>
+
+<!-- Filter Bar -->
+<div class="card" style="margin-bottom: 2rem;">
+  <form method="GET" action="{{ url_for('transactions') }}" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;">
+    <div style="flex: 1; min-width: 220px;">
+      <label for="account_number" style="font-weight: 600; font-size: 0.9rem; color: var(--navy-primary); display: block; margin-bottom: 0.3rem;">
+        Account Number
+      </label>
+      <input type="text" id="account_number" name="account_number" class="form-control" placeholder="All Accounts or e.g. ACC000000001" value="{{ account_number or '' }}">
+    </div>
+
+    <div style="width: 200px;">
+      <label for="type" style="font-weight: 600; font-size: 0.9rem; color: var(--navy-primary); display: block; margin-bottom: 0.3rem;">
+        Transaction Type
+      </label>
+      <select id="type" name="type" class="form-control">
+        <option value="" {% if not txn_type %}selected{% endif %}>All Types</option>
+        <option value="deposit" {% if txn_type == 'deposit' %}selected{% endif %}>Deposits Only</option>
+        <option value="withdrawal" {% if txn_type == 'withdrawal' %}selected{% endif %}>Withdrawals Only</option>
+      </select>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Filter Ledger</button>
+      <a href="{{ url_for('transactions') }}" class="btn btn-outline">Reset</a>
+    </div>
+  </form>
+</div>
+
+<!-- Ledger Table -->
+<div class="card">
+  {% if rows %}
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Txn ID</th>
+            <th>Account No.</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date & Time</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in rows %}
+            <tr>
+              <td>#{{ r.transaction_id }}</td>
+              <td><strong>{{ r.account_number }}</strong></td>
+              <td>
+                {% if r.transaction_type == 'deposit' %}
+                  <span class="badge badge-deposit">+ Deposit</span>
+                {% else %}
+                  <span class="badge badge-withdrawal">- Withdrawal</span>
+                {% endif %}
+              </td>
+              <td><strong>Rs. {{ "{:,.2f}".format(r.amount) }}</strong></td>
+              <td>{{ r.transaction_date.strftime('%d %b %Y, %I:%M %p') }}</td>
+              <td>{{ r.description or '-' }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+      Showing {{ rows|length }} transaction records.
+    </p>
+  {% else %}
+    <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+      <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">No transactions found matching your criteria.</p>
+      <p style="font-size: 0.9rem;">Try selecting a different account or removing filters.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

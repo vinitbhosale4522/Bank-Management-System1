@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}View Account Details - Bank Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>View Account Details</h1>
+  <p>Search account information and current status</p>
+</div>
+
+<div class="card form-card" style="margin-bottom: 2rem;">
+  <form method="GET" action="{{ url_for('view_account') }}">
+    <div class="form-group">
+      <label for="account_number">Enter Account Number</label>
+      <input type="text" id="account_number" name="account_number" class="form-control" required placeholder="e.g. ACC000000001" value="{{ account_number or '' }}">
+    </div>
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary btn-block">Search Account</button>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Dashboard</a>
+    </div>
+  </form>
+</div>
+
+{% if account %}
+<div class="card" style="max-width: 700px; margin: 0 auto;">
+  <h3 style="color: var(--navy-primary); margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">
+    Account Information
+  </h3>
+  <table class="data-table">
+    <tr>
+      <th>Account Number</th>
+      <td><strong>{{ account.account_number }}</strong></td>
+    </tr>
+    <tr>
+      <th>Customer Name</th>
+      <td>{{ account.customer_name }}</td>
+    </tr>
+    <tr>
+      <th>Phone</th>
+      <td>{{ account.phone }}</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>{{ account.address }}</td>
+    </tr>
+    <tr>
+      <th>Current Balance</th>
+      <td><strong style="color: var(--navy-primary); font-size: 1.15rem;">Rs. {{ "{:,.2f}".format(account.balance) }}</strong></td>
+    </tr>
+    <tr>
+      <th>Date Opened</th>
+      <td>{{ account.created_at.strftime('%d %b %Y, %I:%M %p') }}</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td>
+        {% if account.status == 'active' %}
+          <span class="badge badge-active">Active</span>
+        {% else %}
+          <span class="badge badge-inactive">Inactive</span>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+  <div class="btn-group" style="margin-top: 1.5rem;">
+    <a href="{{ url_for('deposit', account_number=account.account_number) }}" class="btn btn-primary">Deposit</a>
+    <a href="{{ url_for('withdraw', account_number=account.account_number) }}" class="btn btn-outline">Withdraw</a>
+    <a href="{{ url_for('transactions', account_number=account.account_number) }}" class="btn btn-outline">History</a>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
