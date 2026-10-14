@@ -1,23 +1,5 @@
 """
 app.py — Flask Web Application for Bank Management System
-===========================================================
-Features:
-  1. Create Bank Account
-  2. View Account Details
-  3. Deposit Amount
-  4. Withdraw Amount
-  5. Check Balance
-  6. View Transaction History (Filterable)
-  7. Update Customer Details
-  8. Deactivate Account
-  9. Dashboard / Exit Navigation
-
-Design:
-  - Uses existing DatabaseConnection, models, and real MySQL records.
-  - Parameterized queries (%s) preventing SQL injection.
-  - Decimal monetary precision matching DECIMAL(12,2).
-  - Row locking (FOR UPDATE) & atomic commits/rollbacks for financial integrity.
-"""
 
 from __future__ import annotations
 
@@ -49,9 +31,7 @@ def init_db():
 init_db()
 
 
-# ═════════════════════════════════════════════════════════════════════════════
-# 9. DASHBOARD / HOME (Feature 9)
-# ═════════════════════════════════════════════════════════════════════════════
+# 9. DASHBOARD
 
 @app.route("/")
 def dashboard():
@@ -59,9 +39,7 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 1. CREATE BANK ACCOUNT (Feature 1)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/account/create", methods=["GET", "POST"])
 def create_account():
@@ -139,9 +117,7 @@ def create_account():
     return render_template("create_account.html")
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 2. VIEW ACCOUNT DETAILS (Feature 2)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/account/view")
 def view_account():
@@ -171,9 +147,7 @@ def view_account():
     return render_template("view_account.html", account_number=account_number, account=account)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 3. DEPOSIT AMOUNT (Feature 3)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/deposit", methods=["GET", "POST"])
 def deposit():
@@ -244,9 +218,7 @@ def deposit():
     return render_template("deposit.html", account_number=account_number)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 4. WITHDRAW AMOUNT (Feature 4)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/withdraw", methods=["GET", "POST"])
 def withdraw():
@@ -321,9 +293,7 @@ def withdraw():
     return render_template("withdraw.html", account_number=account_number)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 5. CHECK BALANCE (Feature 5)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/balance", methods=["GET", "POST"])
 def check_balance():
@@ -353,9 +323,8 @@ def check_balance():
     return render_template("check_balance.html", account_number=account_number, result=result)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 6. VIEW TRANSACTIONS (Feature 6)
-# ═════════════════════════════════════════════════════════════════════════════
+
 
 @app.route("/transactions")
 def transactions():
@@ -395,9 +364,7 @@ def transactions():
     return render_template("transactions.html", rows=rows, account_number=account_number, txn_type=txn_type)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 7. UPDATE CUSTOMER DETAILS (Feature 7)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/account/update", methods=["GET", "POST"])
 def update_details():
@@ -462,9 +429,7 @@ def update_details():
     return render_template("update_details.html", account_number=account_number)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # 8. DEACTIVATE ACCOUNT (Feature 8)
-# ═════════════════════════════════════════════════════════════════════════════
 
 @app.route("/account/deactivate", methods=["GET", "POST"])
 def deactivate():
@@ -508,9 +473,7 @@ def deactivate():
     return render_template("deactivate.html", account_number=account_number)
 
 
-# ═════════════════════════════════════════════════════════════════════════════
 # Application Entry Point
-# ═════════════════════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
     print("\n  =======================================================")
