@@ -1,26 +1,9 @@
-"""
-models.py — BankAccount and Transaction data models
-=====================================================
-Responsibility:
-  - Define simple Python dataclasses that mirror the MySQL table rows.
-  - Provide clean __str__ methods for displaying data on the console.
-  - No database logic lives here — these are pure data containers.
-
-Why dataclasses?
-  Python's @dataclass decorator auto-generates __init__, __repr__, and
-  comparison methods so we don't have to write boilerplate code manually.
-  Perfect for students — less code, same power.
-"""
 
 from dataclasses import dataclass
 from decimal import Decimal
 from datetime import datetime
 from typing import Optional
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# BankAccount — mirrors one row in the `accounts` table
-# ─────────────────────────────────────────────────────────────────────────────
 
 @dataclass
 class BankAccount:
@@ -38,7 +21,6 @@ class BankAccount:
     created_at:     datetime
     status:         str              # 'active' or 'inactive'
 
-    # ── Display helper ────────────────────────────────────────────────────────
     def __str__(self) -> str:
         """
         Pretty-print an account for the console menu.
@@ -62,10 +44,6 @@ class BankAccount:
         )
 
 
-# -----------------------------------------------------------------------------
-# Transaction - mirrors one row in the `transactions` table
-# -----------------------------------------------------------------------------
-
 @dataclass
 class Transaction:
     """
@@ -78,7 +56,6 @@ class Transaction:
     transaction_date: datetime
     description:      Optional[str]  # Can be None if no description was given
 
-    # -- Display helper --------------------------------------------------------
     def __str__(self) -> str:
         """
         Pretty-print a single transaction row.
