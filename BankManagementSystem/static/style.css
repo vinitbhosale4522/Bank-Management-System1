@@ -1,7 +1,4 @@
-/* ==========================================================================
    Bank Management System - Web Theme
-   Palette: Clean White Background with Professional Navy Blue
-   ========================================================================== */
 
 :root {
   --navy-primary: #0f2b48;
@@ -37,7 +34,6 @@ body {
   flex-direction: column;
 }
 
-/* ── Navigation Bar ──────────────────────────────────────── */
 .navbar {
   background-color: var(--navy-primary);
   color: #ffffff;
@@ -85,7 +81,6 @@ body {
   text-decoration: underline;
 }
 
-/* ── Main Layout Container ───────────────────────────────── */
 .container {
   max-width: 1100px;
   margin: 2.5rem auto;
@@ -94,7 +89,6 @@ body {
   width: 100%;
 }
 
-/* ── Page Titles ─────────────────────────────────────────── */
 .page-header {
   margin-bottom: 2rem;
   text-align: center;
@@ -111,7 +105,6 @@ body {
   font-size: 1rem;
 }
 
-/* ── Flash Messages ──────────────────────────────────────── */
 .flash-container {
   margin-bottom: 1.5rem;
 }
@@ -137,7 +130,6 @@ body {
   border-color: var(--error-border);
 }
 
-/* ── Form Card ───────────────────────────────────────────── */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -184,7 +176,6 @@ body {
   margin-top: 0.35rem;
 }
 
-/* ── Buttons ─────────────────────────────────────────────── */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -277,7 +268,6 @@ body {
   flex: 1;
 }
 
-/* ── Data Tables ─────────────────────────────────────────── */
 .table-responsive {
   overflow-x: auto;
 }
@@ -333,7 +323,6 @@ body {
   color: #b45309;
 }
 
-/* ── Footer ──────────────────────────────────────────────── */
 .footer {
   background-color: #ffffff;
   border-top: 1px solid var(--border-color);
