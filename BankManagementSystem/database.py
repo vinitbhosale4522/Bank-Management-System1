@@ -1,6 +1,5 @@
 """
 database.py — DatabaseConnection class
-=======================================
 Responsibility:
   - Read MySQL credentials from environment variables (never from hardcoded values).
   - Connect to the MySQL server.
@@ -49,9 +48,7 @@ class DatabaseConnection:
         # These will be set once connect() is called.
         self.connection = None
 
-    # ──────────────────────────────────────────────────────────────────────────
-    # Public methods
-    # ──────────────────────────────────────────────────────────────────────────
+    
 
     def connect(self) -> bool:
         """
@@ -191,11 +188,6 @@ class DatabaseConnection:
             self.connection.close()
             print("[DB] Connection closed. Goodbye!")
 
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Quick test — run this file directly to verify your MySQL setup:
-#   python database.py
-# ──────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 55)
     print("  Bank Management System — Database Connection Test")
