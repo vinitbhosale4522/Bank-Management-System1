@@ -1,19 +1,3 @@
-"""
-account_operations.py - AccountOperations class
-================================================
-Responsibility:
-  - Menu Option 1: Create a new bank account
-  - Menu Option 2: View account details by account number
-  - Menu Option 7: Update customer name, phone, or address
-  - Menu Option 8: Deactivate (soft-delete) an account
-
-Design rule:
-  All database queries in this file use parameterized placeholders (%s).
-  This completely prevents SQL injection attacks.
-
-  NEVER write:  f"SELECT * FROM accounts WHERE account_number = '{acc_no}'"
-  ALWAYS write: "SELECT * FROM accounts WHERE account_number = %s", (acc_no,)
-"""
 
 from __future__ import annotations
 
@@ -37,9 +21,7 @@ class AccountOperations:
     def __init__(self, db: DatabaseConnection):
         self.db = db
 
-    # ==========================================================================
     # MENU OPTION 1 - Create Bank Account
-    # ==========================================================================
 
     def create_account(self) -> None:
         """
@@ -53,7 +35,7 @@ class AccountOperations:
         print("   CREATE NEW BANK ACCOUNT")
         print("=" * 50)
 
-        # -- Collect and validate input -------------------------------------
+        # -Collect and validate input
         customer_name = self._get_valid_name("Enter customer name       : ")
         phone         = self._get_valid_phone("Enter phone number        : ")
         address       = self._get_valid_address("Enter address             : ")
@@ -65,7 +47,7 @@ class AccountOperations:
         try:
             cursor = self.db.get_cursor()
 
-            # -- Generate unique account number -----------------------------
+            # -- Generate unique account number 
             # Strategy: find the highest existing number and add 1.
             # ACC + 9-digit zero-padded number → max: ACC999999999
             cursor.execute(
@@ -83,7 +65,7 @@ class AccountOperations:
 
             account_number = f"ACC{new_num:09d}"  # e.g. ACC000000001
 
-            # -- Insert into accounts table ---------------------------------
+            # -- Insert into accounts table
             cursor.execute(
                 """
                 INSERT INTO accounts
@@ -106,7 +88,7 @@ class AccountOperations:
                     (account_number, str(opening_bal))
                 )
 
-            # -- Commit only after BOTH inserts succeed ---------------------
+            # -- Commit only after BOTH inserts succeed
             self.db.commit()
 
             print(f"\n  [OK] Account created successfully!")
@@ -124,9 +106,7 @@ class AccountOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # MENU OPTION 2 - View Account Details
-    # ==========================================================================
 
     def view_account(self, account_number: str = None) -> BankAccount | None:
         """
@@ -194,9 +174,8 @@ class AccountOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # MENU OPTION 7 - Update Customer Details
-    # ==========================================================================
+    
 
     def update_account(self) -> None:
         """
@@ -269,9 +248,7 @@ class AccountOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # MENU OPTION 8 - Deactivate Account
-    # ==========================================================================
 
     def deactivate_account(self) -> None:
         """
@@ -325,9 +302,8 @@ class AccountOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
+    
     # Helper: fetch account without printing (used by transaction operations)
-    # ==========================================================================
 
     def get_account(self, account_number: str) -> BankAccount | None:
         """
@@ -366,9 +342,7 @@ class AccountOperations:
             if cursor:
                 cursor.close()
 
-    # ==========================================================================
     # Private input-validation helpers
-    # ==========================================================================
 
     def _get_valid_name(self, prompt: str) -> str:
         """
