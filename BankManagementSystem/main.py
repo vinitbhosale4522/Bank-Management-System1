@@ -1,15 +1,4 @@
-"""
-main.py - Application entry point and BankManagementSystem class
-=================================================================
-Responsibility:
-  - Display the main menu in a loop.
-  - Route user choices to the correct operation class.
-  - Start up the database connection and tear it down cleanly on exit.
 
-Stage note:
-  Options 3, 4, 5, 6, 8 show a "Coming soon" stub until Stage 4 & 5.
-  Option 1, 2, 7 are fully working right now.
-"""
 
 import os
 import sys
@@ -19,17 +8,12 @@ from account_operations import AccountOperations
 from transaction_operations import TransactionOperations
 
 
-# -----------------------------------------------------------------------------
-# Helper: clear the console so the menu always appears at the top
-# -----------------------------------------------------------------------------
+# .
 def clear_screen() -> None:
     """Works on both Windows (cls) and Linux/Mac (clear)."""
     os.system("cls" if os.name == "nt" else "clear")
 
 
-# -----------------------------------------------------------------------------
-# BankManagementSystem - the main controller class
-# -----------------------------------------------------------------------------
 
 class BankManagementSystem:
     """
@@ -138,10 +122,6 @@ class BankManagementSystem:
             input("\n  Press Enter to continue...")
             clear_screen()
 
-
-# -----------------------------------------------------------------------------
-# Entry point
-# -----------------------------------------------------------------------------
 if __name__ == "__main__":
     app = BankManagementSystem()
     app.start()
